@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript Quiz</title>
+    <style>
+      /* Apply a global box-sizing to include padding and borders in element size */
+      * {
+        box-sizing: border-box;
+      }
+
+      /* Set default font family and size */
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+      }
+
+      /* Set a max-width for the page content and center it */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Apply basic styling to headings */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 0;
+        font-weight: bold;
+      }
+
+      h1 {
+        font-size: 24px;
+        padding: 2px;
+      }
+
+      h2 {
+        font-size: 20px;
+        padding: 2px;
+      }
+
+      h3 {
+        font-size: 16px;
+        padding: 2px;
+      }
+
+      h4 {
+        font-size: 14px;
+        padding: 2px;
+      }
+
+      h5 {
+        font-size: 12px;
+        padding: 2px;
+      }
+
+      h6 {
+        font-size: 10px;
+        padding: 2px;
+      }
+
+      /* Apply basic styling to paragraphs */
+      p {
+        margin: 0 0 10px;
+        padding: 2px;
+      }
+
+      /* Apply basic styling to lists */
+      ul,
+      ol {
+        margin: 0;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 5px;
+      }
+
+      /* Apply basic styling to links */
+      a {
+        color: #e5dcf7;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* Apply basic styling to buttons */
+      button {
+        padding: 10px 10px;
+        font-size: 14px;
+        border: none;
+        border-radius: 4px;
+        background-color: #584187;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #766894;
+      }
+
+      /* Apply basic styling to input fields */
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      textarea {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      /* Apply basic styling to form elements */
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      /* Apply basic styling to tables */
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        border-bottom: 1px solid #ccc;
+        text-align: left;
+      }
+
+      /* Apply basic styling to images */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      .maintitle {
+        text-align: center;
+        text-transform: uppercase;
+        color: #584187;
+        padding: 3%;
+      }
+      .chapter {
+        text-align: center;
+        color: #766894;
+      }
+      .book {
+        text-align: center;
+        color: #766894;
+      }
+      .heading-box {
+        margin: auto;
+        padding: 4%;
+        width: 1200px;
+        /* padding: 10px;   */
+        background-color: #e5dcf7;
+        border: 2px solid #584187;
+      }
+      .startQuizbutton {
+        margin: 2%;
+        padding: 12px 12px;
+        font-size: 17px;
+        border: none;
+        border-radius: 4px;
+        background-color: #584187;
+        color: #e5dcf7;
+        cursor: pointer;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+
+      .question-style {
+        padding: 2%;
+        margin: 2%;
+        background-color: #e5dcf7;
+        color: #584187;
+      }
+
+      .options-style {
+        padding: 2%;
+        margin: 2%;
+        background-color: #e5dcf7;
+        color: #584187;
+      }
+      .options {
+        padding: 2%;
+        margin: 2%;
+        background-color: #584187;
+        color: #e5dcf7;
+      }
+      .feedback {
+        padding: 2%;
+        margin: 2%;
+        color: #584187;
+        font-size: 16px;
+        text-decoration: underline;
+        font-weight: bolder;
+      }
+      .next-button {
+        padding: 12px 12px;
+        font-size: 17px;
+        border: none;
+        border-radius: 4px;
+        background-color: #584187;
+        color: #e5dcf7;
+      }
+      .float-container {
+        padding: 10px;
+      }
+
+      .float-child {
+        width: 50%;
+        float: left;
+        padding: 10px;
+      }
+
+      .finished {
+        text-align: center;
+        text-transform: uppercase;
+        color: #584187;
+        padding: 10%;
+        font-size: 40px;
+        font-weight: bolder;
+      }
+
+      .score-button {
+        text-align: center;
+        background-color: #04aa6d;
+        border: none;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 30px;
+        margin: 4px 2px;
+        border-radius: 50%;
+      }
+      .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .refresh {
+        position: fixed;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="start-page">
+      <h1 class="maintitle">JavaScript Quiz</h1>
+      <h2 class="chapter">Chapter 3: Variables and Data Types</h2>
+      <h2 class="book">Book: JavaScript Fundamentals</h2>
+      <div class="heading-box">
+        <p>Welcome to the JavaScript Variables and Data Types Quiz!</p>
+        <p>
+          In this quiz, you will be tested on your knowledge of JavaScript
+          variables and data types.
+        </p>
+        <p>
+          The quiz consists of 15 questions divided into three difficulty ranks:
+          easy, average, and hard. You will be presented with multiple-choice
+          questions, and you need to select the correct answer.
+        </p>
+        <p>Click the "Start Quiz" button below to begin the quiz. Good luck!</p>
+      </div>
+
+      <button class="startQuizbutton" onclick="startQuiz()">Start Quiz</button>
+    </div>
+
+    <div id="quiz-container" style="display: none">
+      <h2 class="question-style" id="question"></h2>
+      <ul class="options-style" id="choices">
+        <li class="options">
+          <button onclick="checkAnswer(0)">Choice 1</button>
+        </li>
+        <li class="options">
+          <button onclick="checkAnswer(1)">Choice 2</button>
+        </li>
+        <li class="options">
+          <button onclick="checkAnswer(2)">Choice 3</button>
+        </li>
+        <li class="options">
+          <button onclick="checkAnswer(3)">Choice 4</button>
+        </li>
+      </ul>
+
+      <div class="float-container">
+        <div class="float-child"><p class="feedback" id="feedback"></p></div>
+        <div class="float-child">
+          <a
+            class="next-button"
+            id="next-link"
+            href="#"
+            onclick="nextQuestion()"
+            style="display: none"
+            >Next</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Quiz questions and answers
+      const easyQuestions = [
+        {
+          question:
+            "What is the keyword used to declare a variable in JavaScript?",
+          choices: ["var", "let", "const", "All of the above"],
+          correctAnswer: 3,
+          weight: 1,
+          funFact: "Great job! You've got it!",
+        },
+        {
+          question:
+            "Which data type is used to represent true or false values?",
+          choices: ["String", "Boolean", "Number", "Undefined"],
+          correctAnswer: 1,
+          weight: 1,
+          funFact: "Well done! You're correct!",
+        },
+        {
+          question: "How do you add comments in JavaScript?",
+          choices: [
+            "// This is a comment",
+            "! This is a comment !",
+            "/* This is a comment */",
+            "// This is a comment /* This is another comment */",
+          ],
+          correctAnswer: 0,
+          weight: 1,
+          funFact: "Well done! You're correct!",
+        },
+        {
+          question:
+            "What is the purpose of the document.getElementById() method in JavaScript?",
+          choices: [
+            "It retrieves the value of an element by its class name.",
+            "It retrieves the value of an element by its tag name.",
+            "It retrieves the value of an element by its ID.",
+            "It is used to create a new HTML element with a specified ID. ",
+          ],
+          correctAnswer: 2,
+          weight: 1,
+          funFact: "Well done! You're correct!",
+        },
+        {
+          question: "How do you declare a variable in JavaScript?",
+          choices: [
+            "variableName = value;",
+            "var variableName = value;",
+            "declare variableName = value;",
+            "let variableName = value;",
+          ],
+          correctAnswer: 1,
+          weight: 1,
+          funFact: "Well done! You're correct!",
+        },
+        // Add more easy questions here...
+      ];
+
+      const averageQuestions = [
+        {
+          question: "What is the result of '5' + 3 in JavaScript?",
+          choices: ["8", "53", "NaN", "35"],
+          correctAnswer: 1,
+          weight: 2,
+          funFact: "Nice work! You got it right!",
+        },
+        {
+          question:
+            "Which operator is used to concatenate two strings in JavaScript?",
+          choices: ["+", "-", "*", "/"],
+          correctAnswer: 0,
+          weight: 2,
+          funFact: "You're on fire! That's correct!",
+        },
+        // Add more average questions here...
+      ];
+
+      const hardQuestions = [
+        {
+          question:
+            "What is the output of the following code?\n\nconsole.log(2 + '2' - 1);",
+          choices: ["NaN", "21", "22", "1"],
+          correctAnswer: 2,
+          weight: 3,
+          funFact: "Amazing! You nailed it!",
+        },
+        {
+          question:
+            "What is the scope of a variable declared using the 'let' keyword?",
+          choices: [
+            "Global scope",
+            "Local scope",
+            "Function scope",
+            "Block scope",
+          ],
+          correctAnswer: 3,
+          weight: 3,
+          funFact: "You're unstoppable! That's correct!",
+        },
+        // Add more hard questions here...
+      ];
+
+      let currentQuestionIndex = 0;
+      let score = 0;
+      let currentQuestions;
+
+      function startQuiz() {
+        document.getElementById("start-page").style.display = "none";
+        document.getElementById("quiz-container").style.display = "block";
+        initializeQuiz();
+      }
+
+      function initializeQuiz() {
+        currentQuestionIndex = 0;
+        score = 0;
+
+        const easyQuestionsSubset = getRandomSubset(easyQuestions, 5);
+        const averageQuestionsSubset = getRandomSubset(averageQuestions, 5);
+        const hardQuestionsSubset = getRandomSubset(hardQuestions, 5);
+
+        currentQuestions = easyQuestionsSubset.concat(
+          averageQuestionsSubset,
+          hardQuestionsSubset
+        );
+
+        showQuestion();
+      }
+
+      function getRandomSubset(array, size) {
+        const shuffled = array.sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, size);
+      }
+
+      function showQuestion() {
+        const questionElement = document.getElementById("question");
+        const choicesElement = document.getElementById("choices");
+        const feedbackElement = document.getElementById("feedback");
+        const nextLink = document.getElementById("next-link");
+
+        const currentQuestion = currentQuestions[currentQuestionIndex];
+        questionElement.textContent = currentQuestion.question;
+
+        choicesElement.innerHTML = "";
+        for (let i = 0; i < currentQuestion.choices.length; i++) {
+          const choice = currentQuestion.choices[i];
+          choicesElement.innerHTML += `<li><button onclick="checkAnswer(${i})">${choice}</button></li>`;
+        }
+
+        feedbackElement.textContent = "";
+        nextLink.style.display = "none";
+      }
+
+      function pageRefresh() {
+        location.reload();
+      }
+
+      function checkAnswer(choiceIndex) {
+        const feedbackElement = document.getElementById("feedback");
+        const nextLink = document.getElementById("next-link");
+
+        const currentQuestion = currentQuestions[currentQuestionIndex];
+        if (choiceIndex === currentQuestion.correctAnswer) {
+          feedbackElement.textContent = currentQuestion.funFact;
+          score += currentQuestion.weight;
+        } else {
+          feedbackElement.textContent =
+            "Oops! That's incorrect. The correct answer is: " +
+            currentQuestion.choices[currentQuestion.correctAnswer];
+        }
+
+        nextLink.style.display = "inline";
+      }
+
+      function nextQuestion() {
+        const nextLink = document.getElementById("next-link");
+
+        currentQuestionIndex++;
+        if (currentQuestionIndex < currentQuestions.length) {
+          showQuestion();
+          nextLink.style.display = "none";
+        } else {
+          // End of the quiz
+          const quizContainer = document.getElementById("quiz-container");
+          quizContainer.innerHTML = ` <div><button class="refresh" onclick="pageRefresh()"> Go to Home Page</button></div>
+          <h2 class="finished" >Quiz Finished!</h2>
+          <div class="center">
+            <button class="score-button" >Your score: ${score}/${currentQuestions.length}</button>
+            </div>
+           
+        `;
+        }
+      }
+    </script>
+  </body>
+</html>
